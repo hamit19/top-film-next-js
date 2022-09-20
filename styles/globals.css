@@ -1,11 +1,5 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
+@import url("https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 a {
   color: inherit;
   text-decoration: none;
@@ -13,9 +7,19 @@ a {
 
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-@media (prefers-color-scheme: dark) {
+*,
+body,
+input,
+textarea {
+  font-family: "Signika", sans-serif;
+  letter-spacing: 0.7px;
+}
+
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
@@ -23,4 +27,4 @@ a {
     color: white;
     background: black;
   }
-}
+} */

@@ -1,0 +1,21 @@
+.Brand {
+  font-family: "Pacifico", cursive;
+  border-right: 1px solid #fff;
+  padding: 0 1rem;
+}
+
+.auth_btn {
+  width: 8rem;
+  background-color: #818cf8;
+  transition: all 0.3s ease-in-out;
+  border-color: #818cf8;
+}
+
+.auth_btn:hover {
+  background-color: #4f46e5 !important;
+  border-color: #4f46e5 !important;
+}
+
+.nav_bar {
+  padding: 1rem 0;
+}

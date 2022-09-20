@@ -1,0 +1,14 @@
+.headerSliderWrapper {
+  height: 31.25rem;
+}
+
+.slide_img {
+  position: absolute;
+}
+
+.Slide_text {
+  position: absolute;
+  right: 5rem;
+  bottom: 5rem;
+  color: #fff;
+}
