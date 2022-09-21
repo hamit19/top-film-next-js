@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "antd/dist/antd.css";
+
 //Swiper Styles
 import "swiper/css";
 import "swiper/css/navigation";

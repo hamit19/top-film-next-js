@@ -1,6 +1,9 @@
+import React from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import HeaderSlider from "../components/slider/HeaderSlider";
+import SubSlider from "../components/filmSlider/SubSlider";
+import { Divider } from "antd";
 
 export default function Home({ darkMode, setDarkMode }) {
   return (
@@ -13,6 +16,8 @@ export default function Home({ darkMode, setDarkMode }) {
 
       <main className={styles.main}>
         <HeaderSlider />
+        <Divider orientation="left">The Most Top Films</Divider>
+        <SubSlider />
       </main>
     </div>
   );
