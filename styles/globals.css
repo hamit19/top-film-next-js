@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 a {
   color: inherit;
@@ -15,8 +15,7 @@ a {
 body,
 input,
 textarea {
-  font-family: "Signika", sans-serif;
-  letter-spacing: 0.7px;
+  font-family: "Roboto", sans-serif;
 }
 
 /* @media (prefers-color-scheme: dark) {
