@@ -13,7 +13,11 @@ import "../styles/globals.css";
 function MyApp({ Component, pageProps }) {
   const [darkMode, setDarkMode] = useState(true);
   return (
-    <Layout darkMode={darkMode} setDarkMode={setDarkMode}>
+    <Layout
+      customize={pageProps.customize}
+      darkMode={darkMode}
+      setDarkMode={setDarkMode}
+    >
       <Component {...pageProps} darkMode={darkMode} setDarkMode={setDarkMode} />
     </Layout>
   );

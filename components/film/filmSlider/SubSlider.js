@@ -1,98 +1,66 @@
 import Link from "next/Link";
-import React from "react";
-import { Card } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import SlideCard from "../../films/SliderCard/SlideCard";
+import Styles from "./Slider.module.css";
 
 const SubSlider = () => {
+  const [screenSize, setScreenSize] = useState(null);
+
+  useEffect(() => {
+    setScreenSize(window.innerWidth);
+
+    const setScreenWith = (screenWith) => setScreenSize(screenWith);
+    window.addEventListener("resize", () => setScreenWith(window.innerWidth));
+
+    return () => {
+      window.removeEventListener("resize", () => setScreenWith());
+    };
+  }, []);
+
   return (
-    <div>
-      <Swiper slidesPerView={8} spaceBetween={10}>
-        <SwiperSlide>
-          <Link href={"/films/[slug]"} as={"/films/film1"}>
-            <Card style={{ width: "10rem", cursor: "pointer" }}>
-              <Card.Img src={"/assets/films/film1.jpg"} alt="image 1" />
-            </Card>
-          </Link>
+    <div style={{ marginBottom: "10rem" }}>
+      <Swiper
+        className={Styles.sub_slider_wrapper}
+        slidesPerView={
+          screenSize <= 500
+            ? 1
+            : screenSize > 500 && screenSize <= 767
+            ? 1
+            : screenSize > 767 && screenSize <= 968
+            ? 2
+            : screenSize > 968 && screenSize <= 1200
+            ? 3
+            : screenSize > 1200 && 4
+        }
+        spaceBetween={2}
+      >
+        <SwiperSlide style={{ padding: ".5rem" }}>
+          <SlideCard />
         </SwiperSlide>
-
-        <SwiperSlide>
-          <Link href={"/films/[slug]"} as={"/films/film2"}>
-            <Card style={{ width: "10rem", cursor: "pointer" }}>
-              <Card.Img src={"/assets/films/film2.jpg"} alt="image 1" />
-            </Card>
-          </Link>
+        <SwiperSlide style={{ padding: ".5rem" }}>
+          <SlideCard />
         </SwiperSlide>
-
-        <SwiperSlide>
-          <Link href={"/films/[slug]"} as={"/films/film3"}>
-            <Card style={{ width: "10rem", cursor: "pointer" }}>
-              <Card.Img src={"/assets/films/film3.jpg"} alt="image 1" />
-            </Card>
-          </Link>
+        <SwiperSlide style={{ padding: ".5rem" }}>
+          <SlideCard />
         </SwiperSlide>
-
-        <SwiperSlide>
-          <Link href={"/films/[slug]"} as={"/films/film4"}>
-            <Card style={{ width: "10rem", cursor: "pointer" }}>
-              <Card.Img src={"/assets/films/film4.jpg"} alt="image 1" />
-            </Card>
-          </Link>
+        <SwiperSlide style={{ padding: ".5rem" }}>
+          <SlideCard />
         </SwiperSlide>
-
-        <SwiperSlide>
-          <Link href={"/films/[slug]"} as={"/films/film5"}>
-            <Card style={{ width: "10rem", cursor: "pointer" }}>
-              <Card.Img src={"/assets/films/film5.jpg"} alt="image 1" />
-            </Card>
-          </Link>
+        <SwiperSlide style={{ padding: ".5rem" }}>
+          <SlideCard />
         </SwiperSlide>
-
-        <SwiperSlide>
-          <Link href={"/films/[slug]"} as={"/films/film6"}>
-            <Card style={{ width: "10rem", cursor: "pointer" }}>
-              <Card.Img src={"/assets/films/film1.jpg"} alt="image 1" />
-            </Card>
-          </Link>
+        <SwiperSlide style={{ padding: ".5rem" }}>
+          <SlideCard />
         </SwiperSlide>
-
-        <SwiperSlide>
-          <Link href={"/films/[slug]"} as={"/films/film7"}>
-            <Card style={{ width: "10rem", cursor: "pointer" }}>
-              <Card.Img src={"/assets/films/film6.jpg"} alt="image 1" />
-            </Card>
-          </Link>
+        <SwiperSlide style={{ padding: ".5rem" }}>
+          <SlideCard />
         </SwiperSlide>
-
-        <SwiperSlide>
-          <Link href={"/films/[slug]"} as={"/films/film8"}>
-            <Card style={{ width: "10rem", cursor: "pointer" }}>
-              <Card.Img src={"/assets/films/film5.jpg"} alt="image 1" />
-            </Card>
-          </Link>
+        <SwiperSlide style={{ padding: ".5rem" }}>
+          <SlideCard />
         </SwiperSlide>
-
-        <SwiperSlide>
-          <Link href={"/films/[slug]"} as={"/films/film9"}>
-            <Card style={{ width: "10rem", cursor: "pointer" }}>
-              <Card.Img src={"/assets/films/film1.jpg"} alt="image 1" />
-            </Card>
-          </Link>
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <Link href={"/films/[slug]"} as={"/films/film10"}>
-            <Card style={{ width: "10rem", cursor: "pointer" }}>
-              <Card.Img src={"/assets/films/film1.jpg"} alt="image 1" />
-            </Card>
-          </Link>
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <Link href={"/films/[slug]"} as={"/films/film11"}>
-            <Card style={{ width: "10rem", cursor: "pointer" }}>
-              <Card.Img src={"/assets/films/film5.jpg"} alt="image 1" />
-            </Card>
-          </Link>
+        <SwiperSlide style={{ padding: ".5rem" }}>
+          <SlideCard />
         </SwiperSlide>
       </Swiper>
     </div>

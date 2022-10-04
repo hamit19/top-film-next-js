@@ -18,6 +18,70 @@ textarea {
   font-family: "Roboto", sans-serif;
 }
 
+body,
+main {
+  height: 100%;
+}
+
+.ant-comment-avatar img {
+  object-fit: cover !important;
+}
+
+.ant-slider-handle {
+  visibility: hidden !important;
+}
+
+.ant-slider.VideoPlayer_progress_bar__loKd5.ant-slider-horizontal:hover
+  .ant-slider-handle {
+  visibility: visible !important;
+}
+
+.ant-slider-track {
+  transition: all 0.1s linear !important;
+}
+
+.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light {
+  backdrop-filter: blur(30px);
+  background-color: unset !important;
+  z-index: 10 !important;
+}
+.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light
+  > li {
+  color: #fff !important;
+}
+
+.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light
+  > li:hover {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(60px) !important;
+  font-size: 0.75rem;
+  color: rgb(220, 220, 220) !important;
+}
+
+.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child.active_menu {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.ant-radio-button-wrapper {
+  margin: 0 0.3rem !important ;
+  border-radius: 0.3rem !important ;
+  border-left-width: 1px !important;
+}
+
+.ant-radio-button-wrapper::before {
+  position: unset !important;
+  top: unset !important;
+  left: unset !important;
+  display: unset !important;
+  box-sizing: unset !important;
+  width: unset !important;
+  height: unset !important;
+  padding: unset !important;
+  background-color: unset !important;
+  transition: unset !important;
+  content: "";
+}
+
 /* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
@@ -26,4 +90,4 @@ textarea {
     color: white;
     background: black;
   }
-} */
+} */ ;

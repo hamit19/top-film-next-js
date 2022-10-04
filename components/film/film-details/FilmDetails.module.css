@@ -1,0 +1,159 @@
+.main_wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.details_wrapper {
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  background-color: #fff;
+}
+
+.info_wrapper {
+  padding: 0.75rem;
+  background: #e7edec95;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+.info_wrapper > p {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.synopsis_wrapper {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  background-color: #fff;
+  padding: 1rem;
+  margin: auto;
+}
+
+.synopsis_span {
+  color: #8b5cf6;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.title_wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title_wrapper .title {
+  text-align: center;
+  font-size: 1.3rem;
+  color: #333;
+}
+
+.title_wrapper > span {
+  width: 200px;
+  height: 2px;
+  background: linear-gradient(45deg, #8b5cf6, #a21caf, #db2777);
+  border-radius: 1rem;
+}
+
+.agents_info_wrapper {
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #e7edec95;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin: 1rem;
+}
+
+.agents_details_wrapper {
+  padding: 1rem 0;
+}
+
+.agents_info_wrapper:hover {
+  background: #8b5cf6;
+  color: #fff;
+}
+
+.agents_info_wrapper > p {
+  margin: 0;
+}
+
+.agents_info_wrapper > p > span {
+  font-size: 0.6rem;
+  margin-left: 0.5rem;
+}
+
+.trailer_section {
+  position: relative;
+}
+
+.trailer_wrapper {
+  width: 100%;
+  height: 30rem;
+  z-index: -1;
+  background: linear-gradient(
+    45deg,
+    rgba(129, 140, 248, 0.9),
+    rgba(99, 102, 241, 0.5),
+    rgba(139, 92, 246, 0.6)
+  );
+  clip-path: polygon(0 8%, 100% 0, 100% 91%, 0% 100%);
+  padding: 2rem;
+}
+
+.trailer_player {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 20rem;
+}
+
+.trailer_title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.trailer_title > h5 {
+  color: #fff;
+  margin: 0;
+  font-size: 2rem;
+}
+
+.trailer_title > span {
+  background-color: #fff;
+  border-radius: 1rem;
+  width: 10rem;
+  height: 2px;
+}
+
+@media screen and (min-width: 645px) {
+  .details_wrapper,
+  .agents_details_wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .synopsis_wrapper {
+    max-width: 900px;
+  }
+
+  .info_wrapper {
+    margin: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 968px) {
+  .details_wrapper,
+  .agents_details_wrapper {
+    margin: auto;
+    width: 900px;
+  }
+}

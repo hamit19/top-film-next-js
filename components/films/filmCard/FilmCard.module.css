@@ -1,0 +1,133 @@
+.film_card_grid {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.main_content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.card_description {
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 1rem 0;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.span_purple {
+  color: #8b5cf6;
+}
+
+.download_btn {
+  padding: 0.5rem 2rem;
+  border: 1px solid #8b5cf6;
+  background-color: #8b5cf6;
+  color: #fff;
+  border-radius: 0.5rem;
+  margin: auto;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 0px 15px #6c28d9a6;
+}
+
+.download_btn:hover {
+  background-color: #6d28d9;
+  box-shadow: 0px 0px 0px #6c28d965;
+}
+
+.img_car_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card_details > p {
+  font-size: 13px;
+}
+
+.card_film_description {
+  padding: 0 1rem;
+}
+
+.sidebar_card {
+  background-color: #7c3aed;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 0.75rem;
+}
+
+.circle_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.circle {
+  width: 2.2rem;
+  height: 2.2rem;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.3);
+}
+
+.circle_span {
+  font-size: 0.75rem;
+  color: #fff;
+}
+
+@media screen and (min-width: 700px) {
+  .film_card_grid {
+    flex-direction: row;
+    max-width: 900px;
+  }
+
+  .sidebar_card {
+    flex-direction: column;
+    width: 70px;
+  }
+
+  .circle_wrapper {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .main_content {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .card_description {
+    border-top: unset;
+  }
+
+  .responsive_wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .film_image {
+    width: 200px !important;
+    height: 300px !important ;
+  }
+}
+/* 
+@media screen and (min-width: 968px) {
+  .film_card_grid {
+    max-width: 700px;
+  }
+} */

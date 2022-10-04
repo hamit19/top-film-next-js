@@ -17,11 +17,12 @@ const ActiveLink = ({ children, href }) => {
   };
 
   const activeLinkHandel = () => {
-    if (router.asPath.split("/")[1] == href) {
-      return true;
-    } else {
-      return false;
-    }
+    const mainHref = href.split("/")[1];
+    const routerPath = router.asPath.split("/")[1];
+
+    // if (href == " " && router.asPath == "/") return true;
+
+    return routerPath === mainHref;
   };
 
   return (

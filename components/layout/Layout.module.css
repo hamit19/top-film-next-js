@@ -4,11 +4,18 @@
   padding: 0 1rem;
 }
 
+.Brand_light {
+  font-family: "Pacifico", cursive;
+  border-right: 1px solid #333;
+  padding: 0 1rem;
+}
+
 .auth_btn {
-  width: 8rem;
   background-color: #818cf8;
   transition: all 0.3s ease-in-out;
   border-color: #818cf8;
+  font-size: 0.75rem;
+  border-radius: 3px !important;
 }
 
 .auth_btn:hover {
@@ -18,4 +25,12 @@
 
 .nav_bar {
   padding: 1rem 0;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+}
+
+.nav_bar_actions_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
