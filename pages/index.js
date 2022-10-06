@@ -4,6 +4,7 @@ import styles from "../styles/Home.module.css";
 import HeaderSlider from "../components/slider/HeaderSlider";
 import SubSlider from "../components/film/filmSlider/SubSlider";
 import { Divider } from "antd";
+import axios from "axios";
 
 export default function Home({ darkMode, setDarkMode }) {
   return (

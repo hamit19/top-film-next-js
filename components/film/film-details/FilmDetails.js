@@ -54,7 +54,7 @@ function FilmDetails() {
             <div className={Styles.agents_info_wrapper}>
               <Avatar
                 src={
-                  "https://i0.wp.com/gaycarboys.com/wp-content/uploads/2020/06/Austin_L_Young_Top_Gay_Twink_Performer.jpg?w=300&ssl=1"
+                  "https://media.gq.com/photos/56bcb218cdf2db6945d2ef93/4:3/w_2000,h_1500,c_limit/bieber-coverstory-square.jpg"
                 }
               />
               <p>
