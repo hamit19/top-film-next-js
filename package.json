@@ -11,6 +11,7 @@
   "dependencies": {
     "antd": "^4.23.2",
     "axios": "^0.27.2",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^5.2.1",
     "dotenv": "^16.0.3",
     "global": "^4.4.0",
@@ -23,6 +24,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
     "react-player": "^2.11.0",
+    "react-toastify": "^9.0.8",
     "screenfull": "^6.0.2",
     "swiper": "^8.4.2"
   },

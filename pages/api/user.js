@@ -1,9 +1,14 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-const User = require("../../sever/");
+import { createUser } from "../../server/controller/User";
 
-export default function handler(req, res) {
-  console.log(req.body);
+export default async function handler(req, res) {
+  const { email, username, password } = req.body;
 
-  res.status(200).json("Data have returned!");
+  const data = await createUser({ email, username, password });
+
+  if (data.status === "usernameError" || data.status === "emailError")
+    return res.status(501).json(data);
+
+  res.status(200).json(data);
 }
