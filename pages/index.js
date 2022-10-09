@@ -6,7 +6,11 @@ import SubSlider from "../components/film/filmSlider/SubSlider";
 import { Divider } from "antd";
 import axios from "axios";
 
-export default function Home({ darkMode, setDarkMode }) {
+const connectToDatabase = require("../util/mongodb");
+
+export default function Home({ darkMode, setDarkMode, isConnected }) {
+  console.log(isConnected, "is status of db");
+
   return (
     <div className={styles.container}>
       <Head>
@@ -22,4 +26,14 @@ export default function Home({ darkMode, setDarkMode }) {
       </main>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const client = await connectToDatabase();
+  const isConnected = client.connections[0].readyState;
+  return {
+    props: {
+      isConnected,
+    },
+  };
 }

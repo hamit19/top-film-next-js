@@ -1,7 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import { Card } from "react-bootstrap";
-import FilmDetails from "../film-details/FilmDetails";
 import Styles from "./FilmContent.module.css";
 import { FaAward, FaDownload } from "react-icons/fa";
 

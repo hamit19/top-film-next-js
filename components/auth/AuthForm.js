@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Input } from "antd";
 import Button from "react-bootstrap/Button";
 import Styles from "./AuthForm.module.css";
+import axios from "axios";
 
 const AuthForm = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -15,7 +16,19 @@ const AuthForm = () => {
           </h1>
         </div>
         <Form
-          onFinish={(props) => console.log(props)}
+          onFinish={(props) => {
+            if (isSignUp) {
+              const values = {
+                username: props.username,
+                password: props.password,
+                email: props.email,
+              };
+              axios
+                .post("/api/user", { ...values })
+                .then((res) => console.log(res))
+                .catch((err) => console.log(err));
+            }
+          }}
           onFinishFailed={(error) => console.log(error)}
           className={Styles.form}
         >
