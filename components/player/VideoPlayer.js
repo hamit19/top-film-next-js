@@ -58,7 +58,7 @@ const volumeSlider = (volume, setVolume) => {
 };
 
 function VideoPlayer({ videoUrl, height, customClass }) {
-  const [URL, setURL] = useState("");
+  const [URL, setURL] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [isShowing, setIsShowing] = useState(false);
@@ -73,12 +73,12 @@ function VideoPlayer({ videoUrl, height, customClass }) {
   };
 
   useEffect(() => {
-    URL.length <= 0 && setURL(videoUrl);
+    !URL && setURL(videoUrl);
   }, []);
 
   return (
     <div>
-      {URL.length > 0 ? (
+      {URL ? (
         <div ref={refScreenFull}>
           <div
             className={Styles.video_player}
@@ -87,7 +87,7 @@ function VideoPlayer({ videoUrl, height, customClass }) {
             <ReactPlayer
               ref={refVideoPlayer}
               className={customClass}
-              url={videoUrl}
+              url={URL}
               width="100%"
               height={height}
               playing={isPlaying}

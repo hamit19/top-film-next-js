@@ -13,6 +13,11 @@ const hashPassword = (password) => {
   });
 };
 
+const verifyPassword = (passwordAttempt, hashedPassword) => {
+  return bcrypt.compare(passwordAttempt, hashedPassword);
+};
+
 module.exports = {
   hashPassword,
+  verifyPassword,
 };

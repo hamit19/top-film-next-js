@@ -3,8 +3,6 @@ import React from "react";
 import VideoPlayer from "../../../components/player/VideoPlayer";
 import Styles from "./FilmDetails.module.css";
 
-// import demoVideo from "/assets/videos/film.mp4";
-
 function FilmDetails() {
   return (
     <>
@@ -74,7 +72,7 @@ function FilmDetails() {
             <VideoPlayer
               customClass={Styles.react_player}
               height={"100%"}
-              videoUrl="/assets/videos/film.mp4"
+              videoUrl={"/assets/videos/film.mp4"}
             />
           </div>
         </div>

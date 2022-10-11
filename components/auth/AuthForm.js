@@ -4,31 +4,45 @@ import Button from "react-bootstrap/Button";
 import Styles from "./AuthForm.module.css";
 import axios from "axios";
 import { toast } from "react-toastify";
+import BeatLoader from "react-spinners/BeatLoader";
+import classNames from "classnames";
 
 const AuthForm = () => {
   const [isSignUp, setIsSignUp] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [form] = Form.useForm();
 
   const handleSubmit = async (props) => {
-    if (isSignUp) {
-      const values = {
-        username: props.username,
-        password: props.password,
-        email: props.email,
-      };
-      await axios
-        .post("/api/user", { ...values })
-        .then((res) => {
-          res.status === 200 &&
-            toast.success("Great! you have registered successfully.");
-          form.resetFields();
-        })
-        .catch((err) => {
-          console.log(err);
-          toast.error(err.response.data.errorMessage);
-        });
-    }
+    setIsLoading(true);
+
+    const values = {
+      username: props.username,
+      password: props.password,
+      email: props.email,
+    };
+
+    await axios
+      .post(`/api/auth/${isSignUp ? "register" : "login"}`, { ...values })
+      .then((res) => {
+        res.status === 200 &&
+          toast.success(
+            isSignUp
+              ? "Great! you have registered successfully."
+              : `Grate! you're in`
+          );
+        form.resetFields();
+        setIsLoading(false);
+        console.log(res);
+      })
+      .catch((err) => {
+        toast.error(
+          err.response.data.errorMessage
+            ? err.response.data.errorMessage
+            : "Something went wrong! Please try again"
+        );
+        setIsLoading(false);
+      });
   };
 
   const checkTheRePassword = ({ getFieldValue }) => ({
@@ -52,6 +66,7 @@ const AuthForm = () => {
           </h1>
         </div>
         <Form
+          form={form}
           onFinish={(props) => handleSubmit(props)}
           onFinishFailed={(error) => console.log(error)}
           className={Styles.form}
@@ -124,8 +139,16 @@ const AuthForm = () => {
             </Form.Item>
           )}
 
-          <Button variant="primary" type="submit" onClick={() => {}}>
-            {!isSignUp ? "Sign In" : "Sign Up"}
+          <Button variant="primary" type="submit" className={Styles.submit_btn}>
+            {!isSignUp ? "Sing In" : "Sign Up"}
+            <BeatLoader
+              color={"#fff"}
+              size={10}
+              className={classNames(
+                Styles.loader_spinner,
+                `${isLoading && Styles.loader_spinner_active}`
+              )}
+            />
           </Button>
 
           {!isSignUp ? (

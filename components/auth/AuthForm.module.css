@@ -33,3 +33,27 @@
   padding: 1rem;
   text-align: center;
 }
+
+.submit_btn {
+  position: relative !important;
+  height: 2.5rem;
+  overflow: hidden !important;
+}
+
+.loader_spinner {
+  display: none !important;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  background-color: #0d6efd;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.2rem;
+}
+
+.loader_spinner_active {
+  display: flex !important;
+}

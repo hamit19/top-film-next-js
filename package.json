@@ -24,6 +24,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
     "react-player": "^2.11.0",
+    "react-spinners": "^0.13.6",
     "react-toastify": "^9.0.8",
     "screenfull": "^6.0.2",
     "swiper": "^8.4.2"
