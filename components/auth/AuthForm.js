@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Form, Input } from "antd";
 import Button from "react-bootstrap/Button";
 import Styles from "./AuthForm.module.css";
@@ -6,10 +6,15 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import BeatLoader from "react-spinners/BeatLoader";
 import classNames from "classnames";
+import { AuthContextDispatcher } from "../../context/auth";
+import { useRouter } from "next/router";
 
 const AuthForm = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const setAuthState = useContext(AuthContextDispatcher);
+
+  const router = useRouter();
 
   const [form] = Form.useForm();
 
@@ -31,9 +36,16 @@ const AuthForm = () => {
               ? "Great! you have registered successfully."
               : `Grate! you're in`
           );
+
+        !isSignUp &&
+          axios
+            .get("api/auth/user")
+            .then((res) => setAuthState({ token: res?.data?.token }));
+
+        res.status === 200 && !isSignUp ? router.push("/") : setIsSignUp(false);
+
         form.resetFields();
         setIsLoading(false);
-        console.log(res);
       })
       .catch((err) => {
         toast.error(

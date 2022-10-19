@@ -42,12 +42,13 @@ main {
 
 .ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light {
   backdrop-filter: blur(30px);
-  background-color: unset !important;
+  background-color: unset;
   z-index: 10 !important;
 }
 .ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light
   > li {
-  color: #fff !important;
+  color: #fff;
+  border-radius: 0.2rem;
 }
 
 .ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light

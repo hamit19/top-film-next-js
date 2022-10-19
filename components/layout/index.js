@@ -1,12 +1,43 @@
 import React from "react";
-import { Button, Col, Container, Nav, Navbar, Row } from "react-bootstrap";
+import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import Styles from "./Layout.module.css";
 import ActiveLink from "../activeLink/ActiveLink";
 import Link from "next/Link";
 import { FiMoon } from "react-icons/fi";
 import { RiSunLine } from "react-icons/ri";
+import { useContext } from "react";
+import { AuthContext, AuthContextDispatcher } from "../../context/auth";
+import { Avatar, Badge, Dropdown, Menu } from "antd";
 
-const index = ({ children, darkMode, setDarkMode, customize }) => {
+import { AiOutlineUser } from "react-icons/ai";
+import axios from "axios";
+import { toast } from "react-toastify";
+
+const Layout = ({ children, darkMode, setDarkMode, customize }) => {
+  const { isAuthenticated, authState } = useContext(AuthContext);
+  const setAuthState = useContext(AuthContextDispatcher);
+
+  const logOutHandler = async () => {
+    const { data } = await axios.get("/api/auth/logout");
+
+    data.loggedOut && setAuthState(null);
+
+    data.loggedOut && toast.warning(`You've been logged out, successfully!`);
+  };
+
+  const menu = () => {
+    const items = [
+      { key: "0", label: <Link href="/user/[id]"> Profile </Link> },
+      {
+        key: "1",
+        danger: true,
+        label: <span onClick={() => logOutHandler()}> Log Out </span>,
+      },
+    ];
+
+    return <Menu className={Styles.avatar_menu} items={items} />;
+  };
+
   if (customize) {
     return <div>{children}</div>;
   } else {
@@ -54,9 +85,22 @@ const index = ({ children, darkMode, setDarkMode, customize }) => {
                   }}
                 />
               )}
-              <Link href={"/auth"}>
-                <Button className={Styles.auth_btn}>Log In</Button>
-              </Link>
+              {isAuthenticated() ? (
+                <Dropdown overlay={menu}>
+                  <Badge dot>
+                    <Avatar
+                      src={
+                        "https://en.gravatar.com/avatar/toplearn?s=164&identicont"
+                      }
+                      style={{ cursor: "pointer" }}
+                    />
+                  </Badge>
+                </Dropdown>
+              ) : (
+                <Link href={"/auth"}>
+                  <Button className={Styles.auth_btn}>Log In</Button>
+                </Link>
+              )}
             </div>
           </Container>
         </Navbar>
@@ -66,4 +110,4 @@ const index = ({ children, darkMode, setDarkMode, customize }) => {
   }
 };
 
-export default index;
+export default Layout;

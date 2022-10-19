@@ -11,18 +11,36 @@ import "swiper/css/pagination";
 import Layout from "../components/layout";
 import "../styles/globals.css";
 import { ToastContainer } from "react-toastify";
+import { AuthProvider } from "../context/auth";
+
+//loader
+import Loader from "../util/loader";
+import "../styles/loader.scss";
 
 function MyApp({ Component, pageProps }) {
   const [darkMode, setDarkMode] = useState(true);
+
+  const [loader, setLoader] = useState(false);
+
   return (
-    <Layout
-      customize={pageProps.customize}
-      darkMode={darkMode}
-      setDarkMode={setDarkMode}
-    >
-      <ToastContainer pauseOnHover />
-      <Component {...pageProps} darkMode={darkMode} setDarkMode={setDarkMode} />
-    </Layout>
+    <AuthProvider>
+      {loader ? (
+        <Loader isFirst setLoader={(bool) => setLoader(bool)} />
+      ) : (
+        <Layout
+          customize={pageProps.customize}
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
+        >
+          <ToastContainer pauseOnHover theme="colored" />
+          <Component
+            {...pageProps}
+            darkMode={darkMode}
+            setDarkMode={setDarkMode}
+          />
+        </Layout>
+      )}
+    </AuthProvider>
   );
 }
 

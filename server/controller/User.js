@@ -1,6 +1,7 @@
 const {
   hashPassword,
   verifyPassword,
+  createToken,
 } = require("../middleware/authentication");
 const User = require("../model/User");
 
@@ -64,17 +65,17 @@ const authUser = async ({ username, password }) => {
 
     const { email, created } = checkTheUserExisting;
 
+    const data = { username, email, created };
+
+    const token = await createToken({ username, password, email, created });
+
     return {
-      data: { username, email, created },
+      data,
+      token,
     };
   } catch (err) {
     throw err;
   }
-
-  return {
-    data: "data",
-    status: "success",
-  };
 };
 
 module.exports = {

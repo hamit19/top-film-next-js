@@ -34,3 +34,10 @@
   justify-content: space-between;
   gap: 1rem;
 }
+
+.avatar_menu {
+  width: 140px;
+  backdrop-filter: unset !important;
+  background-color: #333 !important;
+  padding: 0.5rem;
+}
