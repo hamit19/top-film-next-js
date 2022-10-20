@@ -9,9 +9,10 @@ import { useContext } from "react";
 import { AuthContext, AuthContextDispatcher } from "../../context/auth";
 import { Avatar, Badge, Dropdown, Menu } from "antd";
 
-import { AiOutlineUser } from "react-icons/ai";
 import axios from "axios";
 import { toast } from "react-toastify";
+
+const avatarImage = "https://en.gravatar.com/avatar/toplearn?s=164&identicont";
 
 const Layout = ({ children, darkMode, setDarkMode, customize }) => {
   const { isAuthenticated, authState } = useContext(AuthContext);
@@ -88,12 +89,7 @@ const Layout = ({ children, darkMode, setDarkMode, customize }) => {
               {isAuthenticated() ? (
                 <Dropdown overlay={menu}>
                   <Badge dot>
-                    <Avatar
-                      src={
-                        "https://en.gravatar.com/avatar/toplearn?s=164&identicont"
-                      }
-                      style={{ cursor: "pointer" }}
-                    />
+                    <Avatar src={avatarImage} style={{ cursor: "pointer" }} />
                   </Badge>
                 </Dropdown>
               ) : (
