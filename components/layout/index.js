@@ -102,7 +102,10 @@ const Layout = ({ children, darkMode, setDarkMode, customize }) => {
               )}
               {isAuthenticated() ? (
                 <Dropdown overlay={menu}>
-                  <Badge dot>
+                  <Badge
+                    dot
+                    status={authState?.user?.sub ? "success" : "error"}
+                  >
                     <Avatar
                       src={authState?.user?.profilePhoto}
                       style={{ cursor: "pointer" }}
