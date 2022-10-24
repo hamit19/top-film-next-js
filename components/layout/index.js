@@ -12,7 +12,6 @@ import { Avatar, Badge, Dropdown, Menu } from "antd";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 const Layout = ({ children, darkMode, setDarkMode, customize }) => {
   const { isAuthenticated, authState } = useContext(AuthContext);
