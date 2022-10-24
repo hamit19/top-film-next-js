@@ -1,6 +1,6 @@
 import { withIronSessionApiRoute } from "iron-session/next";
 
-function handle(req, res) {
+async function handle(req, res) {
   res.send({ ...req.session.token });
 }
 

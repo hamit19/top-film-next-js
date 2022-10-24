@@ -8,6 +8,7 @@ import BeatLoader from "react-spinners/BeatLoader";
 import classNames from "classnames";
 import { AuthContextDispatcher } from "../../context/auth";
 import { useRouter } from "next/router";
+import jwt from "jsonwebtoken";
 
 const AuthForm = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -38,9 +39,32 @@ const AuthForm = () => {
           );
 
         !isSignUp &&
-          axios
-            .get("api/auth/user")
-            .then((res) => setAuthState({ token: res?.data?.token }));
+          axios.get("api/auth/user").then((res) => {
+            if (res.data.token) {
+              const {
+                username,
+                email,
+                created,
+                profilePhoto,
+                role,
+                sub,
+                sub_time,
+              } = jwt.decode(res?.data?.token);
+
+              setAuthState({
+                token: res?.data?.token,
+                user: {
+                  username,
+                  email,
+                  created,
+                  profilePhoto,
+                  role,
+                  sub,
+                  sub_time,
+                },
+              });
+            }
+          });
 
         res.status === 200 && !isSignUp ? router.push("/") : setIsSignUp(false);
 
@@ -50,7 +74,7 @@ const AuthForm = () => {
       .catch((err) => {
         toast.error(
           err.response.data.errorMessage
-            ? err.response.data.errorMessage
+            ? err?.response?.data?.errorMessage
             : "Something went wrong! Please try again"
         );
         setIsLoading(false);

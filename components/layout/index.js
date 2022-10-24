@@ -11,28 +11,42 @@ import { Avatar, Badge, Dropdown, Menu } from "antd";
 
 import axios from "axios";
 import { toast } from "react-toastify";
-
-const avatarImage = "https://en.gravatar.com/avatar/toplearn?s=164&identicont";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const Layout = ({ children, darkMode, setDarkMode, customize }) => {
   const { isAuthenticated, authState } = useContext(AuthContext);
   const setAuthState = useContext(AuthContextDispatcher);
+
+  const router = useRouter();
 
   const logOutHandler = async () => {
     const { data } = await axios.get("/api/auth/logout");
 
     data.loggedOut && setAuthState(null);
 
-    data.loggedOut && toast.warning(`You've been logged out, successfully!`);
+    data.loggedOut && toast.warning(`You've logged out!`);
+
+    router.push("/");
   };
 
   const menu = () => {
     const items = [
-      { key: "0", label: <Link href="/user/[id]"> Profile </Link> },
+      {
+        key: "0",
+        label: (
+          <Link
+            href="/user/[username]"
+            as={`/user/${authState?.user?.username}`}
+          >
+            Profile
+          </Link>
+        ),
+      },
       {
         key: "1",
         danger: true,
-        label: <span onClick={() => logOutHandler()}> Log Out </span>,
+        label: <li onClick={() => logOutHandler()}> Log Out </li>,
       },
     ];
 
@@ -89,7 +103,10 @@ const Layout = ({ children, darkMode, setDarkMode, customize }) => {
               {isAuthenticated() ? (
                 <Dropdown overlay={menu}>
                   <Badge dot>
-                    <Avatar src={avatarImage} style={{ cursor: "pointer" }} />
+                    <Avatar
+                      src={authState?.user?.profilePhoto}
+                      style={{ cursor: "pointer" }}
+                    />
                   </Badge>
                 </Dropdown>
               ) : (

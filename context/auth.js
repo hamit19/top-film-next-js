@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { createContext, useState, useEffect } from "react";
+import jwt from "jsonwebtoken";
 
 const AuthContext = createContext();
 const AuthContextDispatcher = createContext();
@@ -11,9 +12,32 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     try {
-      axios
-        .get("/api/auth/user")
-        .then((res) => setAuthState({ token: res?.data?.token }));
+      axios.get("/api/auth/user").then((res) => {
+        if (res.data.token) {
+          const {
+            username,
+            email,
+            created,
+            profilePhoto,
+            role,
+            sub,
+            sub_time,
+          } = jwt.decode(res?.data?.token);
+
+          setAuthState({
+            token: res?.data?.token,
+            user: {
+              username,
+              email,
+              created,
+              profilePhoto,
+              role,
+              sub,
+              sub_time,
+            },
+          });
+        }
+      });
     } catch (err) {
       console.log(err);
     }

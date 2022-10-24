@@ -1,7 +1,16 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useContext } from "react";
 import AuthForm from "../../components/auth/AuthForm";
+import { AuthContext } from "../../context/auth";
 
-const auth = () => {
+const Auth = () => {
+  const router = useRouter();
+  const { isAuthenticated } = useContext(AuthContext);
+
+  if (isAuthenticated()) {
+    router.push("/");
+  }
+
   return (
     <div>
       <AuthForm />
@@ -9,4 +18,4 @@ const auth = () => {
   );
 };
 
-export default auth;
+export default Auth;

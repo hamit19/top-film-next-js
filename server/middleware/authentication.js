@@ -18,12 +18,20 @@ const verifyPassword = (passwordAttempt, hashedPassword) => {
   return bcrypt.compare(passwordAttempt, hashedPassword);
 };
 
-const createToken = ({ username, password, email, created }) => {
-  if (!username || !password || !email || !created)
+const createToken = ({
+  username,
+  email,
+  created,
+  sub,
+  sub_time,
+  profilePhoto,
+  role,
+}) => {
+  if (!username || !email || !created || !profilePhoto || !role)
     throw new Error("Values are not completed!");
 
   return jwt.sign(
-    { username, password, email, created },
+    { username, email, created, sub, sub_time, role, profilePhoto },
     process.env.JWT_SECRET_KEY,
     {
       algorithm: "HS256",

@@ -63,11 +63,20 @@ const authUser = async ({ username, password }) => {
         status: "incorrectData",
       };
 
-    const { email, created } = checkTheUserExisting;
+    const { email, created, role, profilePhoto, sub, sub_time } =
+      await checkTheUserExisting;
 
     const data = { username, email, created };
 
-    const token = await createToken({ username, password, email, created });
+    const token = await createToken({
+      username,
+      email,
+      created,
+      profilePhoto,
+      sub,
+      sub_time,
+      role,
+    });
 
     return {
       data,
@@ -78,7 +87,128 @@ const authUser = async ({ username, password }) => {
   }
 };
 
+const getUserData = async ({ username }) => {
+  const isExistedUser = User.findOne({ username });
+
+  if (isExistedUser) {
+    const { email, created, sub, sub_time, rol, profilePhoto } =
+      await isExistedUser;
+
+    return {
+      email,
+      created,
+      sub,
+      sub_time,
+      rol,
+      profilePhoto,
+      username,
+    };
+  }
+
+  if (!isExistedUser) {
+    return { type: "userError", messageError: "The user is not existed!" };
+  }
+};
+
+const updateUser = async ({ username, newPassword, email, oldPassword }) => {
+  const foundedUser = await User.findOne({ username });
+
+  console.log(newPassword, "this is the log in controller new pass!");
+
+  if (foundedUser && newPassword) {
+    const { password } = await foundedUser;
+
+    const verifiedPassword = await verifyPassword(oldPassword, password);
+
+    if (verifiedPassword) {
+      const hashedPassword = await hashPassword(newPassword);
+
+      const updatedUser = await User.findByIdAndUpdate(
+        foundedUser._id,
+        { password: hashedPassword },
+        { new: true }
+      );
+
+      const { sub, sub_time, profilePhoto, role, created } = await updatedUser;
+
+      const token = await createToken({
+        sub,
+        sub_time,
+        profilePhoto,
+        role,
+        created,
+        username,
+        email,
+        email: email,
+        username: username,
+      });
+
+      return {
+        token,
+        user: {
+          email: email,
+          username: username,
+          sub,
+          sub_time,
+          profilePhoto,
+          role,
+          created,
+        },
+      };
+    }
+
+    if (!verifiedPassword) {
+      return {
+        type: "userError",
+        messageError: "The old password you have entered is incorrect!",
+      };
+    }
+  }
+
+  if (foundedUser && !newPassword) {
+    const updatedUser = await User.findByIdAndUpdate(foundedUser._id, {
+      email: email,
+    });
+
+    const { sub, sub_time, profilePhoto, role, created } = await updatedUser;
+
+    const token = await createToken({
+      sub,
+      sub_time,
+      profilePhoto,
+      role,
+      created,
+      username,
+      email,
+      email: email,
+      username: username,
+    });
+
+    return {
+      token,
+      user: {
+        email: email,
+        username: username,
+        sub,
+        sub_time,
+        profilePhoto,
+        role,
+        created,
+      },
+    };
+  }
+
+  if (!foundedUser) {
+    return {
+      type: "userError",
+      messageError: "Something went wrong please try again!",
+    };
+  }
+};
+
 module.exports = {
   createUser,
   authUser,
+  getUserData,
+  updateUser,
 };
