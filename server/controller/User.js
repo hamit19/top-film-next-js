@@ -91,7 +91,7 @@ const getUserData = async ({ username }) => {
   const isExistedUser = User.findOne({ username });
 
   if (isExistedUser) {
-    const { email, created, sub, sub_time, rol, profilePhoto } =
+    const { email, created, sub, sub_time, role, profilePhoto } =
       await isExistedUser;
 
     return {
@@ -99,7 +99,7 @@ const getUserData = async ({ username }) => {
       created,
       sub,
       sub_time,
-      rol,
+      role,
       profilePhoto,
       username,
     };
@@ -206,9 +206,30 @@ const updateUser = async ({ username, newPassword, email, oldPassword }) => {
   }
 };
 
+const getUsersCount = async () => {
+  const usersCount = await User.countDocuments();
+
+  return { users: usersCount };
+};
+
+const getUsers = async (params) => {
+  const page = parseInt(params.page);
+  const pageSize = parseInt(params.pageSize);
+
+  const count = await getUsersCount();
+
+  const users = await User.find({})
+    .limit(pageSize)
+    .skip(page === 1 ? 0 : (page - 1) * pageSize);
+
+  return { users, count: count.users };
+};
+
 module.exports = {
   createUser,
   authUser,
   getUserData,
   updateUser,
+  getUsersCount,
+  getUsers,
 };

@@ -1,0 +1,10 @@
+.row {
+  width: 100%;
+  padding-top: 18rem;
+}
+
+@media screen and (min-width: 768px) {
+  .row {
+    padding-top: unset;
+  }
+}

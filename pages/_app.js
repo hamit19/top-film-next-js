@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "antd/dist/antd.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -33,11 +33,13 @@ function MyApp({ Component, pageProps }) {
           setDarkMode={setDarkMode}
         >
           <ToastContainer pauseOnHover theme="colored" />
-          <Component
-            {...pageProps}
-            darkMode={darkMode}
-            setDarkMode={setDarkMode}
-          />
+          <React.StrictMode>
+            <Component
+              {...pageProps}
+              darkMode={darkMode}
+              setDarkMode={setDarkMode}
+            />
+          </React.StrictMode>
         </Layout>
       )}
     </AuthProvider>

@@ -32,7 +32,7 @@ const Layout = ({ children, darkMode, setDarkMode, customize }) => {
   const menu = () => {
     const items = [
       {
-        key: "0",
+        key: "1",
         label: (
           <Link
             href="/user/[username]"
@@ -43,9 +43,12 @@ const Layout = ({ children, darkMode, setDarkMode, customize }) => {
         ),
       },
       {
-        key: "1",
-        danger: true,
-        label: <li onClick={() => logOutHandler()}> Log Out </li>,
+        key: "2",
+        label: (
+          <p style={{ margin: "0" }} onClick={() => logOutHandler()}>
+            Log Out
+          </p>
+        ),
       },
     ];
 
@@ -100,7 +103,7 @@ const Layout = ({ children, darkMode, setDarkMode, customize }) => {
                 />
               )}
               {isAuthenticated() ? (
-                <Dropdown overlay={menu}>
+                <Dropdown trigger={["hover"]} overlay={menu()}>
                   <Badge
                     dot
                     status={authState?.user?.sub ? "success" : "error"}

@@ -1,0 +1,45 @@
+.trigger {
+  position: absolute;
+  right: -3rem;
+  top: 1rem;
+  z-index: 100;
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+  display: none;
+}
+
+.trigger:hover {
+  color: #1890ff;
+}
+
+.site_layout .site_layout_background {
+  position: relative;
+  background: #fff;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.content_wrapper {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.site_layout .site_layout_background h5 {
+  margin: 0;
+}
+.site_layout .site_layout_background h5 span {
+  color: #1890ff;
+}
+
+@media screen and (min-width: 768px) {
+  .trigger {
+    display: inline-block;
+  }
+}

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import FilmCard from "../../components/films/filmCard/FilmCard";
 import Styles from "./filmsPage.module.css";
 import { Pagination, Radio } from "antd";
+import Head from "next/head";
 
-function films() {
+function Films() {
   const [value, setValue] = useState("Apple");
   const options = [
     { value: "Dream", label: "Dream" },
@@ -19,6 +20,9 @@ function films() {
 
   return (
     <div className={Styles.main_wrapper}>
+      <Head>
+        <title>Films | TopFilm</title>
+      </Head>
       <Radio.Group
         options={options}
         onChange={onChange3}
@@ -38,4 +42,4 @@ function films() {
   );
 }
 
-export default films;
+export default Films;

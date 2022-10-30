@@ -1,4 +1,4 @@
-import { Form, Input, Modal, Button } from "antd";
+import { Form, Input, Button, Modal } from "antd";
 import axios from "axios";
 import React from "react";
 import { useContext } from "react";
@@ -11,6 +11,46 @@ function UserEditInfo({ username, email }) {
   const [isDisabled, setIsDisabled] = useState(true);
   const setAuthState = useContext(AuthContextDispatcher);
 
+  const handleOnFinish = (values) => {
+    Modal.confirm({
+      title: "Are You Sure!",
+      content: "Are you sure about changing your personal information?",
+      okText: "Yes",
+      cancelText: "No",
+
+      onCancel: () => {
+        setIsDisabled(true);
+      },
+
+      onOk: () => {
+        try {
+          axios
+            .patch("/api/user/updateuser", { ...values, username })
+            .then((res) => {
+              res?.data?.status === 200 &&
+                setAuthState({
+                  token: res?.data?.token,
+                  user: res?.data?.user,
+                });
+              toast.success("Grate, your info have updated successfully!");
+              // window.location.reload();
+            })
+            .catch((err) =>
+              toast.error(
+                err?.response?.data?.messageError
+                  ? err?.response?.data?.messageError
+                  : "Something went wrong please try again!"
+              )
+            );
+
+          setIsDisabled(true);
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    });
+  };
+
   if (!username || !email) return <h3>Loading...</h3>;
 
   return (
@@ -21,45 +61,7 @@ function UserEditInfo({ username, email }) {
           email: email,
         }}
         onFinish={(values) => {
-          Modal.confirm({
-            title: "Are you Sure!",
-            content: "Are you sure about changing your personal info?",
-            okText: "Yes",
-            cancelText: "No",
-
-            onCancel: () => {
-              setIsDisabled(true);
-            },
-
-            onOk: () => {
-              try {
-                axios
-                  .patch("/api/user/updateuser", { ...values, username })
-                  .then((res) => {
-                    res?.data?.status === 200 &&
-                      setAuthState({
-                        token: res?.data?.token,
-                        user: res?.data?.user,
-                      });
-                    toast.success(
-                      "Grate, your info have updated successfully!"
-                    );
-                    window.location.reload();
-                  })
-                  .catch((err) =>
-                    toast.error(
-                      err?.response?.data?.messageError
-                        ? err?.response?.data?.messageError
-                        : "Something went wrong please try again!"
-                    )
-                  );
-
-                setIsDisabled(true);
-              } catch (err) {
-                console.log(err);
-              }
-            },
-          });
+          handleOnFinish(values);
         }}
         onFinishFailed={(err) => console.log(err)}
       >

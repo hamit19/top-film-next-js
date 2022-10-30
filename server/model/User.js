@@ -23,7 +23,6 @@ userSchema.set("toJSON", { getters: true });
 userSchema.options.toJSON.transform = (doc, rest) => {
   const obj = { ...rest };
   delete obj.id;
-  delete obj._id;
   delete obj.__v;
   return obj;
 };

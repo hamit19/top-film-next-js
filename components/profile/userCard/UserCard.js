@@ -5,11 +5,13 @@ import MainLoader from "../../loaderSpinner/MainLoader";
 import { Avatar, Badge, Divider } from "antd";
 import moment from "moment";
 import { Card } from "react-bootstrap";
+import AdminCard from "../adminCard/AdminCard";
 
 function UserCard(user) {
   if (!user) return <MainLoader />;
 
-  const { username, email, sub, sub_time, profilePhoto, created } = user.user;
+  const { username, email, sub, sub_time, profilePhoto, created, role } =
+    user.user;
 
   return (
     <div className={Styles.card_wrapper}>
@@ -35,10 +37,19 @@ function UserCard(user) {
             {sub && (
               <li>
                 Your subscription will be expired:{" "}
-                <p> {moment(sub_time).endOf("ss").fromNow()} </p>
+                <p style={{ marginTop: "1rem" }}>
+                  {moment(sub_time).endOf("ss").fromNow()}
+                </p>
               </li>
             )}
           </ul>
+
+          {role === "admin" && (
+            <>
+              <Divider>Admin Access</Divider>
+              <AdminCard />
+            </>
+          )}
         </Card.Body>
       </Card>
     </div>
