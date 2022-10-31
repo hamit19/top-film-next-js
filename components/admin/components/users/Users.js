@@ -1,9 +1,10 @@
-import { Badge, Table } from "antd";
+import { Badge, Modal, Table } from "antd";
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import useSWR from "swr";
 import MainLoader from "../../../loaderSpinner/MainLoader";
+import EditUserData from "./EditUserData";
 
 function Users() {
   const [activePage, setActivePage] = useState(1);
@@ -17,6 +18,15 @@ function Users() {
       setCount(res.data.count);
     })
   );
+
+  const handleEditUserData = (record) => {
+    return Modal.info({
+      title: "Edit Users Data",
+      content: <EditUserData userData={record} />,
+      okText: "Close",
+      okType: "danger",
+    });
+  };
 
   const handlePaginationChanges = (page, pageSize) => {
     axios
@@ -59,9 +69,14 @@ function Users() {
     {
       title: "Action",
       key: "action",
-      render: () => (
+      render: (text, record) => (
         <>
-          <Button variant="danger" style={{ fontSize: "10px" }} type="text">
+          <Button
+            onClick={() => handleEditUserData(record)}
+            variant="danger"
+            style={{ fontSize: "10px" }}
+            type="text"
+          >
             Edit
           </Button>
         </>

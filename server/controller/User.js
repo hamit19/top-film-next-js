@@ -225,6 +225,14 @@ const getUsers = async (params) => {
   return { users, count: count.users };
 };
 
+const patchUser = async (value) => {
+  const { user_id, values } = value;
+
+  const updatedUser = await User.findByIdAndUpdate(user_id, { ...values });
+
+  return { user: updatedUser };
+};
+
 module.exports = {
   createUser,
   authUser,
@@ -232,4 +240,5 @@ module.exports = {
   updateUser,
   getUsersCount,
   getUsers,
+  patchUser,
 };
