@@ -36,7 +36,7 @@ function EditUserData({ userData }) {
           name="username"
           label="Username"
           rules={[
-            { required: true, message: "The username field con not be empty!" },
+            { required: true, message: "The username field can not be empty!" },
             {
               pattern: /^[A-Za-z][A-Za-z0-9]*$/,
               message: "Please enter your username with Latin letters!",
