@@ -4,7 +4,7 @@ import Styles from "./HomeAdiminComponent.module.css";
 import axios from "axios";
 import useSWR from "swr";
 
-function HomeAdminComponent() {
+function HomeAdminComponent({ filmsCount }) {
   const fetcher = (url) => axios.get(url).then((res) => res.data);
 
   const { data, error } = useSWR("/api/admin/home/count", fetcher);
@@ -51,7 +51,22 @@ function HomeAdminComponent() {
           bg="primary"
         >
           <Card.Header>Count of Films</Card.Header>
-          <Card.Body>Card number 2</Card.Body>
+          <Card.Body>
+            {
+              <div>
+                {error && !data ? (
+                  <h5 style={{ color: "#fff" }}>Something went wrong!</h5>
+                ) : !data ? (
+                  <h5 style={{ color: "#fff" }}> Loading... </h5>
+                ) : (
+                  <>
+                    <h5 style={{ color: "#fff" }}> {filmsCount} </h5>
+                    <h6 style={{ color: "#fff" }}>Films</h6>
+                  </>
+                )}
+              </div>
+            }
+          </Card.Body>
         </Card>
       </Col>
       <Col xl={3} lg={6} md={6} sm={12} xs={12}>

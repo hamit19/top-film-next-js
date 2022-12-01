@@ -79,14 +79,28 @@ const updateFilm = async (params) => {
   const newVideo = await video;
 
   if (film_id) {
-    const foundedFilm = await Film.findById(film_id);
+    const foundFilm = await Film.findById(film_id);
 
     if (newVideo && !newPoster) {
-      const oldVideo = await foundedFilm.video;
+      const oldVideo = await foundFilm.video;
 
-      const deletedVideoStatus = await deleteMedia(oldVideo);
+      const deletedVideo = await deleteMedia(oldVideo);
 
-      if (deletedVideoStatus.status === 200) {
+      if (deletedVideo.status === 404) {
+        return {
+          status: 404,
+          message: "The media that assigned the film have not been found!",
+        };
+      }
+
+      if (deletedVideo.status === 500) {
+        return {
+          status: 500,
+          message: "Something went wrong during the deletion of the media!",
+        };
+      }
+
+      if (deletedVideo.status === 200) {
         const updatedFilm = await Film.findByIdAndUpdate(
           film_id,
           {
@@ -104,9 +118,23 @@ const updateFilm = async (params) => {
     }
 
     if (newPoster && !newVideo) {
-      const oldPoster = await foundedFilm.poster;
+      const oldPoster = await foundFilm.poster;
 
       const deletedPoster = await deleteMedia(oldPoster);
+
+      if (deletedPoster.status === 404) {
+        return {
+          status: 404,
+          message: "The media that assigned the film have not been found!",
+        };
+      }
+
+      if (deletedPoster.status === 500) {
+        return {
+          status: 500,
+          message: "Something went wrong during the deletion of the media!",
+        };
+      }
 
       if (deletedPoster.status === 200) {
         const updatedFilm = await Film.findByIdAndUpdate(film_id, {
@@ -123,11 +151,25 @@ const updateFilm = async (params) => {
     }
 
     if (newPoster && newVideo) {
-      const oldVideo = await foundedFilm.video;
-      const oldPoster = await foundedFilm.poster;
+      const oldVideo = await foundFilm.video;
+      const oldPoster = await foundFilm.poster;
 
       const deletedPoster = await deleteMedia(oldPoster);
       const deletedVideo = await deleteMedia(oldVideo);
+
+      if (deletedPoster.status === 404 || deletedVideo.status === 404) {
+        return {
+          status: 404,
+          message: "The media that assigned the film have not been found!",
+        };
+      }
+
+      if (deletedPoster.status === 500 || deletedVideo.status === 500) {
+        return {
+          status: 500,
+          message: "Something went wrong during the deletion of the media!",
+        };
+      }
 
       if (deletedPoster.status === 200 && deletedVideo.status === 200) {
         const updatedFilm = await Film.findByIdAndUpdate(
@@ -170,8 +212,41 @@ const updateFilm = async (params) => {
   }
 };
 
+const deleteFilm = async (id) => {
+  if (!id) return { status: 404, message: " Films id required! " };
+
+  const foundFilm = await Film.findById(id);
+
+  const deletedPoster = await deleteMedia(foundFilm.poster);
+  const deletedVideo = await deleteMedia(foundFilm.video);
+
+  if (deletedPoster.status === 200 && deletedVideo.status === 200) {
+    const deletedFilm = await Film.findByIdAndDelete(id);
+
+    const updatedFilmList = await Film.find({});
+    const filmsCount = await getFilmsCount();
+
+    return { data: updatedFilmList, filmsCount, deletedFilm, status: 200 };
+  }
+
+  if (deletedPoster.status === 404 || deletedVideo.status === 404) {
+    return {
+      status: 404,
+      message: "The media that assigned the film have not been found!",
+    };
+  }
+
+  if (deletedPoster.status === 500 || deletedVideo.status === 500) {
+    return {
+      status: 500,
+      message: "Something went wrong during the deletion of the media!",
+    };
+  }
+};
+
 module.exports = {
   createFilm,
   getFilms,
   updateFilm,
+  deleteFilm,
 };

@@ -5,8 +5,9 @@ import axios from "axios";
 import useSWR from "swr";
 import MainLoader from "../../../loaderSpinner/MainLoader";
 import EditFilmsData from "./EditFilmsData";
+import { toast } from "react-toastify";
 
-function FilmListAdminComponent() {
+function FilmListAdminComponent({ setFilmsCount }) {
   const [activePage, setActivePage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [tableData, setTableData] = useState();
@@ -16,17 +17,49 @@ function FilmListAdminComponent() {
     axios.get(url, { params: { page: activePage, pageSize } }).then((res) => {
       setTableData(res.data.data);
       setCount(res.data.count);
+      setFilmsCount(res.data.count.count);
       console.log(res.data);
     })
   );
 
-  const handleEditUserData = (record) => {
+  const handleEditFilmData = (record) => {
     return Modal.info({
       title: "Edit Film info",
       content: <EditFilmsData filmData={record} />,
       okText: "Close",
       okType: "danger",
       className: "w-75",
+    });
+  };
+
+  const handleDeleteFilm = (id) => {
+    return Modal.confirm({
+      title: "Delete the film",
+      content:
+        "Are you sure you want to delete this film?! if you are click on Delete button.",
+      cancelText: "Cancel",
+      okText: "Delete",
+      okType: "danger",
+      onOk: () => {
+        axios
+          .delete("/api/admin/films/delete", { params: { id } })
+          .then((res) => {
+            res.status === 200 &&
+              toast.success("The film has deleted successfully!");
+
+            console.log(res.data);
+
+            setTableData(res.data.data);
+            setFilmsCount(res.data.filmsCount);
+          })
+          .catch((err) => {
+            toast.error(
+              err?.response?.data?.messageError
+                ? err?.response?.data?.messageError
+                : "Something went wrong please try again!"
+            );
+          });
+      },
     });
   };
 
@@ -71,12 +104,28 @@ function FilmListAdminComponent() {
       render: (text, record) => (
         <>
           <Button
-            onClick={() => handleEditUserData(record)}
-            variant="danger"
+            onClick={() => handleEditFilmData(record)}
+            variant="primary"
             style={{ fontSize: "10px" }}
             type="text"
           >
             Edit
+          </Button>
+        </>
+      ),
+    },
+    {
+      title: "Action",
+      key: "action2",
+      render: (text, record) => (
+        <>
+          <Button
+            onClick={() => handleDeleteFilm(record._id)}
+            variant="danger"
+            style={{ fontSize: "10px" }}
+            type="text"
+          >
+            Delete
           </Button>
         </>
       ),

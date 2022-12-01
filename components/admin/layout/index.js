@@ -19,6 +19,7 @@ const { Sider, Content } = Layout;
 
 const AdminLayout = () => {
   const [collapsed, setCollapsed] = useState(true);
+  const [filmsCount, setFilmsCount] = useState(0);
 
   const [activeComponent, setActiveComponent] = useState(
     <HomeAdminComponent />
@@ -28,25 +29,21 @@ const AdminLayout = () => {
     {
       key: "1",
       icon: <HomeOutlined />,
-      label: "Home",
-      component: <HomeAdminComponent />,
+      component: <HomeAdminComponent filmsCount={filmsCount} />,
     },
     {
       key: "2",
       icon: <UserOutlined />,
-      label: "Users List",
       component: <Users />,
     },
     {
       key: "3",
       icon: <VideoCameraOutlined />,
-      label: "Films List",
-      component: <Films />,
+      component: <Films setFilmsCount={setFilmsCount} />,
     },
     {
       key: "4",
       icon: <UploadOutlined />,
-      label: "Upload new film",
       component: <CreateMedia />,
     },
   ];
