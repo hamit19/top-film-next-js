@@ -1,0 +1,56 @@
+.plan_box {
+  border-radius: 1rem;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  padding: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #fff;
+  height: 27rem;
+}
+
+.header_box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.header_box h6 {
+  font-size: 0.9rem;
+  color: gray;
+}
+
+.header_box h5 span {
+  color: #0d6efd;
+  font-size: 1.6rem;
+}
+
+.header_box h5 {
+  padding-top: 1rem;
+}
+.header_box h5 .time_span {
+  font-size: 12px;
+  color: gray;
+}
+
+.plan_box_list {
+  height: 100%;
+  list-style: none;
+}
+
+.plan_box_list li {
+  margin: 0.6rem 0;
+  font-size: 1rem;
+}
+
+.plan_box_list li::before {
+  content: "\2022";
+  color: #0d6efd;
+  margin-left: -0.5rem;
+  font-weight: bold !important;
+  width: 1rem;
+  display: inline-block;
+}

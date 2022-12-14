@@ -244,9 +244,22 @@ const deleteFilm = async (id) => {
   }
 };
 
+const getFilmsSliders = async () => {
+  const mostPopularFilms = await Film.find({}).sort("-score").limit(10);
+  const latestFilms = await Film.find({}).sort("-release_date").limit(10);
+  const mostOldFilms = await Film.find({}).sort("release_date").limit(10);
+
+  return {
+    popular: mostPopularFilms,
+    latest: latestFilms,
+    oldest: mostOldFilms,
+  };
+};
+
 module.exports = {
   createFilm,
   getFilms,
   updateFilm,
   deleteFilm,
+  getFilmsSliders,
 };

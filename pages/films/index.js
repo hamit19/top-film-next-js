@@ -5,7 +5,7 @@ import { Pagination, Radio } from "antd";
 import Head from "next/head";
 
 function Films() {
-  const [value, setValue] = useState("Apple");
+  const [value, setValue] = useState("");
   const options = [
     { value: "Dream", label: "Dream" },
     { value: "Educational_science", label: "Educational_science" },

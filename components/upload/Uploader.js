@@ -63,13 +63,13 @@ const Uploader = ({ img, video, afterUpload }) => {
       }
 
       if (video) {
-        if (file.type === "video/mp4") {
-          setFileList([...fileList, file]);
-          return;
-        }
-        return toast.error(
-          "The format of the video does not be supported! please upload a video in (mp4) format! "
-        );
+        setFileList([...fileList, file]);
+        return;
+        // if (file.type === "video/mp4" || file.type === "video/ts") {
+        // }
+        // return toast.error(
+        //   "The format of the video does not be supported! please upload a video in (mp4) format! "
+        // );
       }
 
       return false;

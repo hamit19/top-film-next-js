@@ -12,6 +12,7 @@ import { Avatar, Badge, Dropdown, Menu } from "antd";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import Footer from "../footer/Footer";
 
 const Layout = ({ children, darkMode, setDarkMode, customize }) => {
   const { isAuthenticated, authState } = useContext(AuthContext);
@@ -103,7 +104,7 @@ const Layout = ({ children, darkMode, setDarkMode, customize }) => {
                 />
               )}
               {isAuthenticated() ? (
-                <Dropdown trigger={["hover"]} overlay={menu()}>
+                <Dropdown trigger={["click"]} overlay={menu()}>
                   <Badge
                     dot
                     status={authState?.user?.sub ? "success" : "error"}
@@ -123,6 +124,7 @@ const Layout = ({ children, darkMode, setDarkMode, customize }) => {
           </Container>
         </Navbar>
         <main>{children}</main>
+        <Footer />
       </>
     );
   }

@@ -1,0 +1,35 @@
+.divider {
+  font-size: 24px;
+}
+
+.sliders_wrapper {
+  margin-top: 100px;
+}
+
+.banners_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1.5rem;
+  width: 100%;
+}
+
+.plan_box_wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  padding: 2rem 1.5rem;
+  gap: 1.3rem;
+}
+
+@media screen and (min-width: 768px) {
+  .plan_box_container {
+    padding: 1rem;
+  }
+}
+
+@media screen and (min-width: 1260px) {
+  .recommended_plan {
+    position: relative;
+    top: -40px;
+  }
+}

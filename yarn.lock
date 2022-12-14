@@ -5472,13 +5472,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"swiper@npm:^8.4.2":
-  version: 8.4.2
-  resolution: "swiper@npm:8.4.2"
+"swiper@npm:^8.4.5":
+  version: 8.4.5
+  resolution: "swiper@npm:8.4.5"
   dependencies:
     dom7: ^4.0.4
     ssr-window: ^4.0.2
-  checksum: 84f987c8d399ed054002052d00937036d74705bf8177a9f6e7ffb035fbc9aa5b88c833503970df44f86330e632694af9d948baddc7ac32233c8d58756924cccf
+  checksum: 7b790b897c4aeb616cae02517a1137dc3f8d552bcc3ecb2942ddf8e4ae75f2efeb28816d3d4e648248c3a24eb3611f2700f555372c15f7163cc2434da3ef8317
   languageName: node
   linkType: hard
 
@@ -5576,7 +5576,7 @@ __metadata:
     react-toastify: ^9.0.8
     sass: ^1.55.0
     screenfull: ^6.0.2
-    swiper: ^8.4.2
+    swiper: ^8.4.5
     swr: ^1.3.0
   languageName: unknown
   linkType: soft
