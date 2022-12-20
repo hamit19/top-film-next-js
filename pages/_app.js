@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "antd/dist/antd.css";
 import "react-toastify/dist/ReactToastify.css";
+import SwiperCore, {
+  Navigation,
+  Pagination,
+  Autoplay,
+  EffectFade,
+} from "swiper";
 
 //Swiper Styles
 import "swiper/css";
@@ -20,8 +26,10 @@ import "../styles/loader.scss";
 
 function MyApp({ Component, pageProps }) {
   const [darkMode, setDarkMode] = useState(true);
-
   const [loader, setLoader] = useState(false);
+
+  // swiper Slider config
+  SwiperCore.use([Navigation, Pagination, Autoplay, EffectFade]);
 
   return (
     <AuthProvider>

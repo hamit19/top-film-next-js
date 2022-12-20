@@ -2,9 +2,22 @@ import Button from "react-bootstrap/Button";
 import React from "react";
 import Styles from "./PlanBox.module.css";
 
-function PlanBox({ title, price, time, subTitle, download, tvChannel }) {
+function PlanBox({
+  title,
+  price,
+  time,
+  subTitle,
+  download,
+  tvChannel,
+  recommended,
+}) {
   return (
     <div className={Styles.plan_box}>
+      {recommended && (
+        <div className={Styles.recommended_box}>
+          <span>Recommended</span>
+        </div>
+      )}
       <div className={Styles.header_box}>
         <h4>{title}</h4>
         <h6>{subTitle}</h6>

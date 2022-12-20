@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import SubSlider from "../components/film/filmSlider/SubSlider";
@@ -28,6 +28,8 @@ const bannersData = [
 export default function Home({ darkMode, setDarkMode, isConnected, data }) {
   console.log(isConnected, "is status of db");
 
+  const [autoPlay, setAutoPlay] = useState(true);
+
   const { popular, latest, oldest } = data;
 
   const renderBanners = () => {
@@ -42,7 +44,11 @@ export default function Home({ darkMode, setDarkMode, isConnected, data }) {
     ));
   };
 
-  console.log(data);
+  useEffect(() => {
+    return () => {
+      setAutoPlay(false);
+    };
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -53,30 +59,30 @@ export default function Home({ darkMode, setDarkMode, isConnected, data }) {
       </Head>
 
       <main className={styles.main}>
-        <HeaderSlider />
+        <HeaderSlider autoPlay={autoPlay} />
 
-        <div className={styles.sliders_wrapper}>
-          <div>
+        <div className={styles.sliders_main_wrapper}>
+          <div className={styles.sliders_wrapper}>
             <Divider orientation="left" style={{ fontSize: "24px" }}>
               The Most Top Films
             </Divider>
-            <SubSlider key="mostPopular" data={popular} />
+            <SubSlider autoPlay={autoPlay} key="mostPopular" data={popular} />
           </div>
 
-          <div>
+          <div className={styles.sliders_wrapper}>
             <Divider orientation="left" style={{ fontSize: "24px" }}>
               The Latest Films
             </Divider>
-            <SubSlider key="mostPopular" data={latest} />
+            <SubSlider autoPlay={autoPlay} key="mostPopular" data={latest} />
           </div>
 
           <div className={styles.banners_container}>{renderBanners()}</div>
 
-          <div>
+          <div className={styles.sliders_wrapper}>
             <Divider orientation="left" style={{ fontSize: "24px" }}>
               The Oldest Films
             </Divider>
-            <SubSlider key="mostPopular" data={oldest} />
+            <SubSlider autoPlay={autoPlay} key="mostPopular" data={oldest} />
           </div>
 
           <div className={styles.plan_box_wrapper}>
@@ -113,6 +119,7 @@ export default function Home({ darkMode, setDarkMode, isConnected, data }) {
                 time="monthly"
                 download="+500"
                 tvChannel="+100"
+                recommended
               />
             </div>
             <div className={styles.plan_box_container}>

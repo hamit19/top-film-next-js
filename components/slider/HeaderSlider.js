@@ -1,17 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, {
-  Navigation,
-  Pagination,
-  Autoplay,
-  EffectFade,
-} from "swiper";
+import { Navigation, Pagination, Autoplay, EffectFade } from "swiper";
 import Styles from "./Slider.module.css";
 import Image from "next/image";
 import Button from "react-bootstrap/Button";
 import classNames from "classnames";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+// import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Link from "next/Link";
+import { useState } from "react";
 
 const slidersInfo = [
   {
@@ -68,8 +64,7 @@ const slidersInfo = [
   },
 ];
 
-function Slider() {
-  SwiperCore.use([Navigation, Pagination, Autoplay, EffectFade]);
+function Slider({ autoPlay }) {
   const navigationPrevRef = useRef(null);
   const navigationNextRef = useRef(null);
 
@@ -106,6 +101,7 @@ function Slider() {
   return (
     <div className={Styles.mainSlidersWrapper}>
       <Swiper
+        lazy={true}
         loop={true}
         modules={[Navigation, Pagination, Autoplay, EffectFade]}
         navigation={{
@@ -117,13 +113,7 @@ function Slider() {
           swiper.params.navigation.nextEl = navigationNextRef.current;
         }}
         effect="fade"
-        autoplay={{
-          delay: 5000,
-          stopOnLastSlide: false,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: false,
-          waitForTransition: false,
-        }}
+        autoplay={{ ...autoPlay }}
         slidesPerView={1}
         pagination={{ clickable: true }}
         className={Styles.headerSliderWrapper}

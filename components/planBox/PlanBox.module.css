@@ -1,4 +1,6 @@
 .plan_box {
+  position: relative;
+  overflow: hidden;
   border-radius: 1rem;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
   padding: 1.3rem;
@@ -7,6 +9,7 @@
   gap: 1rem;
   background-color: #fff;
   height: 27rem;
+  transition: all 0.3s ease-in-out;
 }
 
 .header_box {
@@ -43,6 +46,46 @@
 .plan_box_list li {
   margin: 0.6rem 0;
   font-size: 1rem;
+}
+
+.recommended_box {
+  position: absolute;
+  left: -7rem;
+  top: -7rem;
+  padding: 1rem;
+  color: #fff;
+  background-color: #0d6efd;
+  transform: rotate(45deg) translateY(-10%);
+  border-radius: 50%;
+  width: 150px;
+  height: 200px;
+  transition: all 0.3s ease-in-out;
+}
+
+.plan_box:hover .recommended_box {
+  left: -5rem;
+  top: -5.5rem;
+}
+
+.recommended_box > span {
+  position: absolute;
+  right: 0;
+  transform: rotate(-95deg) translateX(-6%);
+  bottom: 5.5rem;
+  /* padding-top: 2rem; */
+  font-size: 10px;
+  font-weight: bold;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.plan_box:hover .recommended_box > span {
+  opacity: 1;
+}
+
+.plan_box:hover {
+  transform: translateY(-10%);
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
 }
 
 .plan_box_list li::before {

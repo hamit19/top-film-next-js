@@ -5,7 +5,9 @@ import SlideCard from "../../films/SliderCard/SlideCard";
 import Styles from "./Slider.module.css";
 import { ArrowRightOutlined } from "@ant-design/icons";
 
-const SubSlider = ({ data }) => {
+import { Autoplay } from "swiper";
+
+const SubSlider = ({ data, autoPlay }) => {
   const [screenSize, setScreenSize] = useState(null);
 
   useEffect(() => {
@@ -31,6 +33,8 @@ const SubSlider = ({ data }) => {
 
   return (
     <Swiper
+      modules={[Autoplay]}
+      autoplay={{ ...autoPlay }}
       className={Styles.sub_slider_wrapper}
       slidesPerView={
         screenSize <= 500

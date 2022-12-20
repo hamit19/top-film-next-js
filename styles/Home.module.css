@@ -2,8 +2,12 @@
   font-size: 24px;
 }
 
+.sliders_main_wrapper {
+  padding: 3rem 2rem;
+}
+
 .sliders_wrapper {
-  margin-top: 100px;
+  padding: 1rem;
 }
 
 .banners_container {
@@ -17,7 +21,7 @@
 .plan_box_wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  padding: 2rem 1.5rem;
+  padding: 5rem 1.5rem;
   gap: 1.3rem;
 }
 
