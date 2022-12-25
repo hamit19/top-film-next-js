@@ -17,7 +17,6 @@ function EditFilmsData({ filmData }) {
       .then((res) => {
         res.status === 200 &&
           toast.success(" Grate! Film data have changed successfully!");
-        console.log(res.data);
       })
       .catch((err) => {
         toast.error(

@@ -7,3 +7,9 @@ export default async function handle(req, res) {
     res.status(200).json(data);
   }
 }
+
+export const config = {
+  api: {
+    responseLimit: false,
+  },
+};

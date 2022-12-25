@@ -23,8 +23,6 @@ const Uploader = ({ img, video, afterUpload }) => {
       data: formData,
     });
 
-    console.log(result);
-
     if (result.status === 200) {
       setUploading(false);
       toast.success("Grate, the files have uploaded successfully!");

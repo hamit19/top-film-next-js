@@ -18,7 +18,6 @@ function FilmListAdminComponent({ setFilmsCount }) {
       setTableData(res.data.data);
       setCount(res.data.count);
       setFilmsCount(res.data.count.count);
-      console.log(res.data);
     })
   );
 
@@ -46,8 +45,6 @@ function FilmListAdminComponent({ setFilmsCount }) {
           .then((res) => {
             res.status === 200 &&
               toast.success("The film has deleted successfully!");
-
-            console.log(res.data);
 
             setTableData(res.data.data);
             setFilmsCount(res.data.filmsCount);

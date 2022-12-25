@@ -113,8 +113,6 @@ const getUserData = async ({ username }) => {
 const updateUser = async ({ username, newPassword, email, oldPassword }) => {
   const foundedUser = await User.findOne({ username });
 
-  console.log(newPassword, "this is the log in controller new pass!");
-
   if (foundedUser && newPassword) {
     const { password } = await foundedUser;
 
