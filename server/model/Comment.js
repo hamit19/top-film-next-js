@@ -7,7 +7,7 @@ const CommentSchema = new Schema({
 
   content: { type: String, required: true },
 
-  created: { type: Date, default: new Date(), required: true },
+  created: { type: Date, default: Date.now, required: true },
 });
 
 module.exports = CommentSchema;

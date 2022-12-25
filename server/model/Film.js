@@ -33,13 +33,13 @@ const FilmSchema = new Schema({
     ref: "Media",
     required: true,
   },
-  created: { type: Date, default: new Date(), required: true },
+  created: { type: Date, default: Date.now, required: true },
 });
 
 // FilmSchema.plugin(require("mongoose-autopopulate"));
 
-FilmSchema.pre("find", function () {
-  // this.populate("poster");
+FilmSchema.pre(/^find/, function () {
+  this.populate("poster");
 });
 
 FilmSchema.set("toJSON", { getters: true });

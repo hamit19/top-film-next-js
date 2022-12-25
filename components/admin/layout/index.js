@@ -5,6 +5,8 @@ import {
   UserOutlined,
   VideoCameraOutlined,
   HomeOutlined,
+  PaperClipOutlined,
+  SlidersOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import React, { useState } from "react";
@@ -27,22 +29,50 @@ const AdminLayout = () => {
 
   const menuItems = [
     {
-      key: "1",
+      key: "Home",
+      label: "Home",
       icon: <HomeOutlined />,
       component: <HomeAdminComponent filmsCount={filmsCount} />,
     },
     {
-      key: "2",
+      key: "users_list",
+      label: "Users List",
       icon: <UserOutlined />,
       component: <Users />,
     },
     {
-      key: "3",
+      key: "videos_list",
+      label: "Videos list",
       icon: <VideoCameraOutlined />,
       component: <Films setFilmsCount={setFilmsCount} />,
     },
     {
-      key: "4",
+      key: "banners_list",
+      label: "Banners List",
+      icon: <PaperClipOutlined />,
+      component: <Users />,
+    },
+    {
+      key: "sliders_list",
+      label: "Sliders List",
+      icon: <SlidersOutlined />,
+      component: <Films setFilmsCount={setFilmsCount} />,
+    },
+    {
+      key: "create_move",
+      label: "Create Move",
+      icon: <UploadOutlined />,
+      component: <CreateMedia />,
+    },
+    {
+      key: "create_banner",
+      label: "Create Banner",
+      icon: <UploadOutlined />,
+      component: <CreateMedia />,
+    },
+    {
+      key: "create_slider",
+      label: "Create Slider",
       icon: <UploadOutlined />,
       component: <CreateMedia />,
     },
@@ -53,7 +83,9 @@ const AdminLayout = () => {
 
     const foundedItem = menuItems.find((item) => item.key === key);
 
-    setActiveComponent(foundedItem.component);
+    const { component } = foundedItem;
+
+    setActiveComponent(component);
   };
 
   return (

@@ -158,7 +158,6 @@ function FilmListAdminComponent({ setFilmsCount }) {
         dataSource={tableData}
         columns={columns}
       />
-      ;
     </div>
   );
 }

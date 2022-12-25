@@ -10,7 +10,7 @@ const MediaSchema = Schema({
     data: { type: Buffer, required: true },
     contentType: { type: String, required: true },
   },
-  created: { type: Date, default: Date.now(), required: true },
+  created: { type: Date, default: Date.now, required: true },
 });
 
 MediaSchema.set("toJSON", { getters: true });
