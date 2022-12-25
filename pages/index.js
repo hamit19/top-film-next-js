@@ -28,7 +28,7 @@ const bannersData = [
 export default function Home({ darkMode, setDarkMode, isConnected, data }) {
   console.log(isConnected, "is status of db");
 
-  const [autoPlay, setAutoPlay] = useState(true);
+  const [autoPlay, setAutoPlay] = useState({ delay: 5000 });
 
   const { popular, latest, oldest } = data;
 
@@ -45,8 +45,9 @@ export default function Home({ darkMode, setDarkMode, isConnected, data }) {
   };
 
   useEffect(() => {
-    return () => {
-      setAutoPlay(false);
+    return async () => {
+      await setAutoPlay({ ...autoPlay, delay: undefined });
+      console.log(autoPlay, "autoPlay log!!!!!");
     };
   }, []);
 
@@ -59,9 +60,11 @@ export default function Home({ darkMode, setDarkMode, isConnected, data }) {
       </Head>
 
       <main className={styles.main}>
-        <HeaderSlider autoPlay={autoPlay} />
+        <HeaderSlider autoPlay={autoPlay} key="headerSlider" />
 
         <div className={styles.sliders_main_wrapper}>
+          <div className={styles.banners_container}>{renderBanners()}</div>
+
           <div className={styles.sliders_wrapper}>
             <Divider orientation="left" style={{ fontSize: "24px" }}>
               The Most Top Films
@@ -76,8 +79,6 @@ export default function Home({ darkMode, setDarkMode, isConnected, data }) {
             <SubSlider autoPlay={autoPlay} key="mostPopular" data={latest} />
           </div>
 
-          <div className={styles.banners_container}>{renderBanners()}</div>
-
           <div className={styles.sliders_wrapper}>
             <Divider orientation="left" style={{ fontSize: "24px" }}>
               The Oldest Films
@@ -88,6 +89,7 @@ export default function Home({ darkMode, setDarkMode, isConnected, data }) {
           <div className={styles.plan_box_wrapper}>
             <div className={styles.plan_box_container}>
               <PlanBox
+                key="trailerPlan"
                 title="Trailer Plan"
                 subTitle="You can try our services for a month"
                 price={"$5.99"}
@@ -98,6 +100,7 @@ export default function Home({ darkMode, setDarkMode, isConnected, data }) {
             </div>
             <div className={styles.plan_box_container}>
               <PlanBox
+                key="simplePlan"
                 title="Simple Plan"
                 subTitle="You can use our services for 3 months"
                 price={"$5.99"}
@@ -113,6 +116,7 @@ export default function Home({ darkMode, setDarkMode, isConnected, data }) {
               )}
             >
               <PlanBox
+                key="familyPlan"
                 title="Family Plan"
                 subTitle="You can use our services for 6 months"
                 price={"$3.99"}
@@ -124,6 +128,7 @@ export default function Home({ darkMode, setDarkMode, isConnected, data }) {
             </div>
             <div className={styles.plan_box_container}>
               <PlanBox
+                key="fullPlan"
                 title="Full Plan"
                 subTitle="You can use our services for a year"
                 price={"$10.99"}

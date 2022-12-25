@@ -113,7 +113,7 @@ function Slider({ autoPlay }) {
           swiper.params.navigation.nextEl = navigationNextRef.current;
         }}
         effect="fade"
-        autoplay={{ ...autoPlay }}
+        autoplay={{ delay: 5000 }}
         slidesPerView={1}
         pagination={{ clickable: true }}
         className={Styles.headerSliderWrapper}

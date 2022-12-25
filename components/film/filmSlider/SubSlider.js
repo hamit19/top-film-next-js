@@ -5,9 +5,11 @@ import SlideCard from "../../films/SliderCard/SlideCard";
 import Styles from "./Slider.module.css";
 import { ArrowRightOutlined } from "@ant-design/icons";
 
-import { Autoplay } from "swiper";
+// import SwiperCore, { Autoplay } from "swiper";
 
 const SubSlider = ({ data, autoPlay }) => {
+  // SwiperCore.use([Autoplay]);
+
   const [screenSize, setScreenSize] = useState(null);
 
   useEffect(() => {
@@ -23,19 +25,19 @@ const SubSlider = ({ data, autoPlay }) => {
 
   const renderCardSliders = () => {
     return data.map((film) => (
-      <>
-        <SwiperSlide style={{ padding: ".5rem", width: "100%" }}>
-          <SlideCard data={film} />
-        </SwiperSlide>
-      </>
+      <SwiperSlide key={film.id} style={{ padding: ".5rem", width: "100%" }}>
+        <SlideCard data={film} />
+      </SwiperSlide>
     ));
   };
 
   return (
     <Swiper
-      modules={[Autoplay]}
-      autoplay={{ ...autoPlay }}
+      lazy={true}
+      // modules={[Autoplay]}
+      // autoplay={{ delay: 4000 }}
       className={Styles.sub_slider_wrapper}
+      spaceBetween={2}
       slidesPerView={
         screenSize <= 500
           ? 1
@@ -47,7 +49,6 @@ const SubSlider = ({ data, autoPlay }) => {
           ? 3
           : screenSize > 1200 && 4
       }
-      spaceBetween={2}
     >
       {renderCardSliders()}
 
@@ -58,6 +59,7 @@ const SubSlider = ({ data, autoPlay }) => {
           position: "relative",
           paddingTop: "363px",
         }}
+        key={"redirect_slide"}
       >
         <Link href={"/films/"} as={"/films/"}>
           <div className={Styles.show_more_wrapper}>
