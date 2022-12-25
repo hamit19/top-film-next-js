@@ -10,6 +10,8 @@ import classNames from "classnames";
 
 const connectToDatabase = require("../util/mongodb");
 
+const baseURL = "http://localhost:3000";
+
 const bannersData = [
   {
     id: 1,
@@ -26,9 +28,7 @@ const bannersData = [
 ];
 
 export default function Home({ darkMode, setDarkMode, isConnected, data }) {
-  console.log(isConnected, "is status of db");
-
-  const [autoPlay, setAutoPlay] = useState({ delay: 5000 });
+  // console.log(isConnected, "is status of db");
 
   const { popular, latest, oldest } = data;
 
@@ -44,13 +44,6 @@ export default function Home({ darkMode, setDarkMode, isConnected, data }) {
     ));
   };
 
-  useEffect(() => {
-    return async () => {
-      await setAutoPlay({ ...autoPlay, delay: undefined });
-      console.log(autoPlay, "autoPlay log!!!!!");
-    };
-  }, []);
-
   return (
     <div className={styles.container}>
       <Head>
@@ -60,7 +53,7 @@ export default function Home({ darkMode, setDarkMode, isConnected, data }) {
       </Head>
 
       <main className={styles.main}>
-        <HeaderSlider autoPlay={autoPlay} key="headerSlider" />
+        <HeaderSlider key="headerSlider" />
 
         <div className={styles.sliders_main_wrapper}>
           <div className={styles.banners_container}>{renderBanners()}</div>
@@ -69,21 +62,21 @@ export default function Home({ darkMode, setDarkMode, isConnected, data }) {
             <Divider orientation="left" style={{ fontSize: "24px" }}>
               The Most Top Films
             </Divider>
-            <SubSlider autoPlay={autoPlay} key="mostPopular" data={popular} />
+            <SubSlider key="mostPopular" data={popular} />
           </div>
 
           <div className={styles.sliders_wrapper}>
             <Divider orientation="left" style={{ fontSize: "24px" }}>
               The Latest Films
             </Divider>
-            <SubSlider autoPlay={autoPlay} key="mostPopular" data={latest} />
+            <SubSlider key="mostPopular" data={latest} />
           </div>
 
           <div className={styles.sliders_wrapper}>
             <Divider orientation="left" style={{ fontSize: "24px" }}>
               The Oldest Films
             </Divider>
-            <SubSlider autoPlay={autoPlay} key="mostPopular" data={oldest} />
+            <SubSlider key="mostPopular" data={oldest} />
           </div>
 
           <div className={styles.plan_box_wrapper}>
@@ -148,7 +141,7 @@ export async function getServerSideProps(context) {
   const client = await connectToDatabase();
   const isConnected = client.connections[0].readyState;
 
-  const res = await fetch("http://localhost:3000/api/films");
+  const res = await fetch(`${baseURL}/api/films`);
 
   const data = await res.json();
 

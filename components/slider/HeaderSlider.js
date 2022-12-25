@@ -64,7 +64,7 @@ const slidersInfo = [
   },
 ];
 
-function Slider({ autoPlay }) {
+function Slider() {
   const navigationPrevRef = useRef(null);
   const navigationNextRef = useRef(null);
 
@@ -113,7 +113,7 @@ function Slider({ autoPlay }) {
           swiper.params.navigation.nextEl = navigationNextRef.current;
         }}
         effect="fade"
-        autoplay={{ delay: 5000 }}
+        // autoplay={{ delay: 5000 }}
         slidesPerView={1}
         pagination={{ clickable: true }}
         className={Styles.headerSliderWrapper}

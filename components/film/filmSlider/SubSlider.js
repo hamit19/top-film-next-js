@@ -7,21 +7,8 @@ import { ArrowRightOutlined } from "@ant-design/icons";
 
 // import SwiperCore, { Autoplay } from "swiper";
 
-const SubSlider = ({ data, autoPlay }) => {
+const SubSlider = ({ data }) => {
   // SwiperCore.use([Autoplay]);
-
-  const [screenSize, setScreenSize] = useState(null);
-
-  useEffect(() => {
-    setScreenSize(window.innerWidth);
-
-    const setScreenWith = (screenWith) => setScreenSize(screenWith);
-    window.addEventListener("resize", () => setScreenWith(window.innerWidth));
-
-    return () => {
-      window.removeEventListener("resize", () => setScreenWith());
-    };
-  }, []);
 
   const renderCardSliders = () => {
     return data.map((film) => (
@@ -38,17 +25,24 @@ const SubSlider = ({ data, autoPlay }) => {
       // autoplay={{ delay: 4000 }}
       className={Styles.sub_slider_wrapper}
       spaceBetween={2}
-      slidesPerView={
-        screenSize <= 500
-          ? 1
-          : screenSize > 620 && screenSize <= 767
-          ? 2
-          : screenSize > 767 && screenSize <= 968
-          ? 2
-          : screenSize > 968 && screenSize <= 1200
-          ? 3
-          : screenSize > 1200 && 4
-      }
+      breakpoints={{
+        640: {
+          slidesPerView: 1,
+          spaceBetween: 2,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 2,
+        },
+        1228: {
+          slidesPerView: 4,
+          spaceBetween: 2,
+        },
+      }}
     >
       {renderCardSliders()}
 
