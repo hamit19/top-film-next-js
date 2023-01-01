@@ -7,6 +7,7 @@ import HeaderSlider from "../components/slider/HeaderSlider";
 import Banner from "../components/banner/Banner";
 import PlanBox from "../components/planBox/PlanBox";
 import classNames from "classnames";
+import { useRouter } from "next/router";
 
 const connectToDatabase = require("../util/mongodb");
 
@@ -31,6 +32,8 @@ export default function Home({ darkMode, setDarkMode, isConnected, data }) {
   // console.log(isConnected, "is status of db");
 
   const { popular, latest, oldest } = data;
+
+  console.log(data)
 
   const renderBanners = () => {
     return bannersData.map((banner) => (

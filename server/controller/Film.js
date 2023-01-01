@@ -246,7 +246,9 @@ const deleteFilm = async (id) => {
 
 const getFilmsSliders = async () => {
   const mostPopularFilms = await Film.find({}).sort("-score").limit(10);
+
   const latestFilms = await Film.find({}).sort("-release_date").limit(10);
+
   const mostOldFilms = await Film.find({}).sort("release_date").limit(10);
 
   return {
@@ -256,10 +258,20 @@ const getFilmsSliders = async () => {
   };
 };
 
+const searchFilms = async ({ text }) => {
+  const result = await Film.aggregate([
+    { "$match": { "name": { "$regex": text, "$options": "i" } } },
+    { "$project": { "name": 1, "_id": 1 } },
+  ]).limit(15);
+
+  return result;
+};
+
 module.exports = {
   createFilm,
   getFilms,
   updateFilm,
   deleteFilm,
   getFilmsSliders,
+  searchFilms,
 };

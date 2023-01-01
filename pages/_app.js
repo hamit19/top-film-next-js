@@ -28,6 +28,7 @@ function MyApp({ Component, pageProps }) {
   const [darkMode, setDarkMode] = useState(true);
   const [loader, setLoader] = useState(false);
 
+
   // swiper Slider config
   SwiperCore.use([Navigation, Pagination, Autoplay, EffectFade]);
 
@@ -37,7 +38,7 @@ function MyApp({ Component, pageProps }) {
         <Loader isFirst setLoader={(bool) => setLoader(bool)} />
       ) : (
         <Layout
-          customize={pageProps.customize}
+          customize={pageProps?.data?.customize}
           darkMode={darkMode}
           setDarkMode={setDarkMode}
         >

@@ -1,14 +1,15 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import AdminLayout from "../../components/admin/layout";
 import MainLoader from "../../components/loaderSpinner/MainLoader";
 import { AuthContext } from "../../context/auth";
 
-function AdminPanel() {
+function AdminPanel({ data }) {
   const { authState } = useContext(AuthContext);
 
   const router = useRouter();
+
 
   const checkingTheRole = () => {
     authState.user.role !== "admin" && router.push("/error/_403error");
@@ -31,5 +32,11 @@ function AdminPanel() {
     );
   }
 }
+
+AdminPanel.getInitialProps = async ({ pageProps }) => {
+  return {
+    data: { ...pageProps, customize: true },
+  };
+};
 
 export default AdminPanel;

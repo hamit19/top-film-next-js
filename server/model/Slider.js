@@ -13,9 +13,9 @@ sliderSchema.pre(/^find/, function () {
   this.populate("film");
 });
 
-MediaSchema.set("toJSON", { getters: true });
+sliderSchema.set("toJSON", { getters: true });
 
-MediaSchema.options.toJSON.transform = (doc, ret) => {
+sliderSchema.options.toJSON.transform = (doc, ret) => {
   const obj = { ...ret };
 
   delete obj.__v;
@@ -24,4 +24,4 @@ MediaSchema.options.toJSON.transform = (doc, ret) => {
 };
 
 module.exports =
-  mongoose.models.slider || mongoose.model("slider", sliderSchema);
+  mongoose.models.Slider || mongoose.model("Slider", sliderSchema);

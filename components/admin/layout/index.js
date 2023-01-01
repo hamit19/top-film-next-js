@@ -16,6 +16,8 @@ import HomeAdminComponent from "../components/home/HomeAdminComponent";
 import Users from "../components/users/Users";
 import Styles from "./adminLayout.module.css";
 import classNames from "classnames";
+import CreateBanner from "../components/createBanner";
+import BannerListAdminComponent from "../components/banner/BannerListAdminComponent";
 
 const { Sider, Content } = Layout;
 
@@ -50,7 +52,7 @@ const AdminLayout = () => {
       key: "banners_list",
       label: "Banners List",
       icon: <PaperClipOutlined />,
-      component: <Users />,
+      component: <BannerListAdminComponent />,
     },
     {
       key: "sliders_list",
@@ -59,8 +61,8 @@ const AdminLayout = () => {
       component: <Films setFilmsCount={setFilmsCount} />,
     },
     {
-      key: "create_move",
-      label: "Create Move",
+      key: "create_movie",
+      label: "Create Movie",
       icon: <UploadOutlined />,
       component: <CreateMedia />,
     },
@@ -68,7 +70,7 @@ const AdminLayout = () => {
       key: "create_banner",
       label: "Create Banner",
       icon: <UploadOutlined />,
-      component: <CreateMedia />,
+      component: <CreateBanner />,
     },
     {
       key: "create_slider",
@@ -80,7 +82,6 @@ const AdminLayout = () => {
 
   const detectComponents = (e) => {
     const { key } = e;
-
     const foundedItem = menuItems.find((item) => item.key === key);
 
     const { component } = foundedItem;
@@ -128,7 +129,7 @@ const AdminLayout = () => {
           {activeComponent}
         </Content>
       </Layout>
-    </Layout>
+    </Layout >
   );
 };
 export default AdminLayout;
